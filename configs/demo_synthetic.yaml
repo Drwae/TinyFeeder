@@ -1,0 +1,54 @@
+# CPU-friendly end-to-end run on the synthetic AV-FFIA-like dataset.
+# Resolution and budgets are reduced so the whole pipeline finishes on a laptop;
+# see configs/paper.yaml for the settings used in the manuscript.
+seed: 2026
+out_dir: runs/demo_synthetic
+
+data:
+  synthetic: true
+  path: data/synthetic/avffia_synth.npz
+  n_videos: 240
+  samples_per_video: 32
+  img_size: 96
+  n_mels: 64
+  split_fracs: [0.64, 0.16, 0.20]
+
+teachers:
+  backbones: [resnet18, mobilenet_v3_large, shufflenet_v2_x1_0]
+  use_timm: false
+  epochs: 8
+  lr: 2.0e-3
+  batch_size: 64
+
+nas:
+  profile_archs: 300          # architectures profiled for the latency predictor
+  population: 12
+  generations: 6
+  proxy_epochs: 2
+  proxy_train_videos: 60      # proxy training subset (video-level)
+  latency_budget_ms: 6.0      # host-CPU budget used by the demo
+  params_budget: 500000
+  patience: 10
+
+stage1:                       # FP32 training of the selected architecture
+  epochs: 25
+  lr: 3.0e-3
+  batch_size: 64
+
+stage2:                       # mixed-precision QAT
+  epochs: 10
+  lr: 3.0e-4
+  fp16_fraction: 0.15         # most sensitive 15% of layers kept in FP16
+  sensitivity_val_videos: 30
+
+stage3:                       # multi-teacher KD
+  epochs: 15
+  warmup: 3
+  lr: 3.0e-4
+  tau: 4.0
+  beta_max: 0.7
+  lambdas: [1.0, 0.5, 0.3]
+
+export:
+  onnx: true
+  benchmark_runs: 200

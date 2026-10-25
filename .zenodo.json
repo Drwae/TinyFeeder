@@ -1,0 +1,51 @@
+{
+  "title": "TinyFeeder: hardware-aware NAS, mixed-precision QAT and multi-teacher distillation for fish feeding-intensity recognition on edge devices (code)",
+  "upload_type": "software",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "Reference implementation of the TinyFeeder pipeline (hardware-aware NAS with NSGA-II and a gradient-boosted latency predictor, mixed-precision INT8/FP16 quantization-aware training, multi-teacher knowledge distillation, gated audio-visual fusion, ONNX/TensorRT/TFLite deployment) accompanying the Scientific Reports article 'Tiny Feeder: Hardware-Aware Neural Architecture Search for Ultra-Lightweight Fish Feeding Intensity Recognition on Edge Devices'. Includes a synthetic AV-FFIA-like data generator and an end-to-end demonstration run on synthetic data; the farm recordings used in the article are available from the corresponding author on reasonable request.",
+  "keywords": [
+    "fish feeding intensity",
+    "neural architecture search",
+    "edge AI",
+    "quantization-aware training",
+    "knowledge distillation",
+    "precision aquaculture",
+    "multimodal fusion"
+  ],
+  "creators": [
+    {
+      "name": "Elmessery, Wael M.",
+      "affiliation": "Kafrelsheikh University, Egypt",
+      "orcid": "0000-0002-7127-1938"
+    },
+    {
+      "name": "Alnemari, Ashwaq M.",
+      "affiliation": "Prince Sattam bin Abdulaziz University, Saudi Arabia"
+    },
+    {
+      "name": "Hassanien, Hesham A.",
+      "affiliation": "King Faisal University, Saudi Arabia"
+    },
+    {
+      "name": "Abbas, Ahmed O.",
+      "affiliation": "King Faisal University, Saudi Arabia"
+    },
+    {
+      "name": "Mansour, Abdallah Tageldein",
+      "affiliation": "King Faisal University, Saudi Arabia"
+    },
+    {
+      "name": "Ashour, Mohamed",
+      "affiliation": "King Faisal University, Saudi Arabia"
+    },
+    {
+      "name": "Gebru, Fsaha Mebrahtu",
+      "affiliation": "Raya University, Ethiopia"
+    },
+    {
+      "name": "Mahmoud, Mohamed Metwally",
+      "affiliation": "Jadara University, Jordan"
+    }
+  ]
+}

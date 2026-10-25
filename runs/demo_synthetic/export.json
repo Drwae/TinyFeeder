@@ -1,0 +1,10 @@
+{
+  "onnx": "runs/demo_synthetic/tinyfeeder.onnx",
+  "onnx_mb": 0.807217,
+  "max_abs_diff_vs_torch": 3.814697265625e-06,
+  "onnxruntime_cpu_latency_ms": {
+    "median": 0.8393584994337289,
+    "p95": 1.1532274499586486,
+    "p99": 1.4354865099448872
+  }
+}

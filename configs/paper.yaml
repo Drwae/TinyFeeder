@@ -1,0 +1,51 @@
+# Settings reported in the manuscript (Sections 3-4). Requires GPUs and the
+# AV-FFIA recordings (not redistributable; see README "Data").
+seed: 2026
+out_dir: runs/paper
+
+data:
+  synthetic: false
+  path: data/avffia/avffia.npz       # produced by scripts/prepare_avffia.py
+  img_size: 224
+  n_mels: 128
+  split_fracs: [0.64, 0.16, 0.20]
+
+teachers:
+  backbones: [resnest50d, swin_tiny_patch4_window7_224, convnext_base]
+  use_timm: true
+  epochs: 150
+  lr: 1.0e-4
+  batch_size: 64
+
+nas:
+  profile_archs: 5000                # profiled on the target Jetson Nano
+  population: 50
+  generations: 100
+  proxy_epochs: 20
+  proxy_train_videos: null           # full training split
+  latency_budget_ms: 50.0
+  params_budget: 500000
+  patience: 10
+
+stage1:
+  epochs: 200
+  lr: 1.0e-3
+  batch_size: 64
+
+stage2:
+  epochs: 100
+  lr: 1.0e-4
+  fp16_fraction: 0.15
+  sensitivity_val_videos: null
+
+stage3:
+  epochs: 150
+  warmup: 50
+  lr: 5.0e-5
+  tau: 4.0
+  beta_max: 0.7
+  lambdas: [1.0, 0.5, 0.3]
+
+export:
+  onnx: true
+  benchmark_runs: 1000

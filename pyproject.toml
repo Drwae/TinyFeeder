@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinyfeeder"
+version = "1.0.0"
+description = "Hardware-aware NAS, mixed-precision QAT and multi-teacher distillation for fish feeding-intensity recognition on edge devices"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [{name = "Wael M. Elmessery"}, {name = "Fsaha Mebrahtu Gebru"}]
+dependencies = ["torch>=2.1", "torchvision>=0.16", "numpy", "scipy", "pyyaml", "xgboost", "scikit-learn", "matplotlib", "onnx", "onnxruntime"]
+
+[project.optional-dependencies]
+paper = ["timm>=0.9"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["tinyfeeder*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

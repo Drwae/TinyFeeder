@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article below."
+title: "TinyFeeder: hardware-aware NAS, mixed-precision QAT and multi-teacher distillation for fish feeding-intensity recognition on edge devices"
+version: 1.0.0
+date-released: 2026-10-25
+license: MIT
+repository-code: "https://github.com/Drwae/TinyFeeder"
+authors:
+  - family-names: Elmessery
+    given-names: Wael M.
+    orcid: "https://orcid.org/0000-0002-7127-1938"
+    affiliation: "Agricultural Engineering Department, Faculty of Agriculture, Kafrelsheikh University, Egypt"
+  - family-names: Alnemari
+    given-names: Ashwaq M.
+    affiliation: "Prince Sattam bin Abdulaziz University, Saudi Arabia"
+  - family-names: Hassanien
+    given-names: Hesham A.
+    affiliation: "King Faisal University, Saudi Arabia"
+  - family-names: Abbas
+    given-names: Ahmed O.
+    affiliation: "King Faisal University, Saudi Arabia"
+  - family-names: Mansour
+    given-names: Abdallah Tageldein
+    affiliation: "King Faisal University, Saudi Arabia"
+  - family-names: Ashour
+    given-names: Mohamed
+    affiliation: "King Faisal University, Saudi Arabia"
+  - family-names: Gebru
+    given-names: Fsaha Mebrahtu
+    affiliation: "Raya University, Ethiopia"
+  - family-names: Mahmoud
+    given-names: Mohamed Metwally
+    affiliation: "Jadara University, Jordan; VSB - Technical University of Ostrava, Czech Republic"
+preferred-citation:
+  type: article
+  title: "Tiny Feeder: Hardware-Aware Neural Architecture Search for Ultra-Lightweight Fish Feeding Intensity Recognition on Edge Devices"
+  journal: "Scientific Reports"
+  year: 2026
+  status: in-press
+  authors:
+    - family-names: Elmessery
+      given-names: Wael M.
+    - family-names: Alnemari
+      given-names: Ashwaq M.
+    - family-names: Hassanien
+      given-names: Hesham A.
+    - family-names: Abbas
+      given-names: Ahmed O.
+    - family-names: Mansour
+      given-names: Abdallah Tageldein
+    - family-names: Ashour
+      given-names: Mohamed
+    - family-names: Gebru
+      given-names: Fsaha Mebrahtu
+    - family-names: Mahmoud
+      given-names: Mohamed Metwally

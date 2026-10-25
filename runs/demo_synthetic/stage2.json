@@ -1,0 +1,172 @@
+{
+  "fp32_val_acc": 0.8447916666666667,
+  "sensitivity": {
+    "visual.stem.0": 0.002083333333333437,
+    "visual.blocks.0.body.0.0": -0.002083333333333326,
+    "visual.blocks.0.body.1.0": 0.002083333333333437,
+    "visual.blocks.0.body.2.0": 0.002083333333333437,
+    "visual.blocks.1.body.0.0": 0.007291666666666696,
+    "visual.blocks.1.body.1.0": 0.0031250000000000444,
+    "visual.blocks.1.body.2.0": 0.00520833333333337,
+    "visual.blocks.2.body.0.0": 0.006250000000000089,
+    "visual.blocks.2.body.1.0": 0.0031250000000000444,
+    "visual.blocks.2.body.2.0": 0.0031250000000000444,
+    "visual.blocks.3.dw.0": 0.002083333333333437,
+    "visual.blocks.3.pw.0": 0.002083333333333437,
+    "visual.blocks.4.body.0.0": 0.0010416666666667185,
+    "visual.blocks.4.body.1.0": 0.002083333333333437,
+    "visual.blocks.4.body.2.0": 0.0010416666666667185,
+    "visual.blocks.5.body.0.0": 0.0,
+    "visual.blocks.5.body.1.0": 0.004166666666666763,
+    "visual.blocks.5.body.2.fc1": 0.002083333333333437,
+    "visual.blocks.5.body.2.fc2": 0.002083333333333437,
+    "visual.blocks.5.body.3.0": 0.009375000000000022,
+    "visual.proj.0": 0.002083333333333437,
+    "acoustic.body.0.0": 0.008333333333333415,
+    "acoustic.body.1.dw.0": -0.0010416666666666075,
+    "acoustic.body.1.pw.0": 0.0010416666666667185,
+    "acoustic.body.2.0": 0.004166666666666763,
+    "acoustic.body.3.dw.0": 0.0031250000000000444,
+    "acoustic.body.3.pw.0": 0.0031250000000000444,
+    "acoustic.body.4.0": 0.0031250000000000444,
+    "acoustic.fc": 0.002083333333333437,
+    "fusion.gv": 0.00520833333333337,
+    "fusion.ga": 0.0031250000000000444,
+    "fusion.head": 0.002083333333333437
+  },
+  "fp16_layers": [
+    "visual.blocks.5.body.3.0",
+    "acoustic.body.0.0",
+    "visual.blocks.1.body.0.0",
+    "visual.blocks.2.body.0.0",
+    "visual.blocks.1.body.2.0"
+  ],
+  "precision_map": {
+    "visual.stem.0": "int8",
+    "visual.blocks.0.body.0.0": "int8",
+    "visual.blocks.0.body.1.0": "int8",
+    "visual.blocks.0.body.2.0": "int8",
+    "visual.blocks.1.body.0.0": "fp16",
+    "visual.blocks.1.body.1.0": "int8",
+    "visual.blocks.1.body.2.0": "fp16",
+    "visual.blocks.2.body.0.0": "fp16",
+    "visual.blocks.2.body.1.0": "int8",
+    "visual.blocks.2.body.2.0": "int8",
+    "visual.blocks.3.dw.0": "int8",
+    "visual.blocks.3.pw.0": "int8",
+    "visual.blocks.4.body.0.0": "int8",
+    "visual.blocks.4.body.1.0": "int8",
+    "visual.blocks.4.body.2.0": "int8",
+    "visual.blocks.5.body.0.0": "int8",
+    "visual.blocks.5.body.1.0": "int8",
+    "visual.blocks.5.body.2.fc1": "int8",
+    "visual.blocks.5.body.2.fc2": "int8",
+    "visual.blocks.5.body.3.0": "fp16",
+    "visual.proj.0": "int8",
+    "acoustic.body.0.0": "fp16",
+    "acoustic.body.1.dw.0": "int8",
+    "acoustic.body.1.pw.0": "int8",
+    "acoustic.body.2.0": "int8",
+    "acoustic.body.3.dw.0": "int8",
+    "acoustic.body.3.pw.0": "int8",
+    "acoustic.body.4.0": "int8",
+    "acoustic.fc": "int8",
+    "fusion.gv": "int8",
+    "fusion.ga": "int8",
+    "fusion.head": "int8"
+  },
+  "size_mb": 0.205728,
+  "fp32_size_mb": 0.79768,
+  "ablation": {
+    "int8_per_channel": {
+      "val_acc": 0.8412828947368421,
+      "size_mb": 0.196992
+    },
+    "int8_per_tensor": {
+      "val_acc": 0.8388157894736842,
+      "size_mb": 0.196992
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.5430535583903915,
+      "val_acc": 0.8379934210526315,
+      "val_macro_f1": 0.8439258514714848,
+      "beta": 0.0,
+      "sec": 90.18903732299805
+    },
+    {
+      "epoch": 2,
+      "loss": 0.5299475212630472,
+      "val_acc": 0.8305921052631579,
+      "val_macro_f1": 0.8351169120184962,
+      "beta": 0.0,
+      "sec": 88.34583926200867
+    },
+    {
+      "epoch": 3,
+      "loss": 0.5267505614381087,
+      "val_acc": 0.8363486842105263,
+      "val_macro_f1": 0.8418359737817114,
+      "beta": 0.0,
+      "sec": 89.53950428962708
+    },
+    {
+      "epoch": 4,
+      "loss": 0.5140948217166098,
+      "val_acc": 0.8289473684210527,
+      "val_macro_f1": 0.8343800581065959,
+      "beta": 0.0,
+      "sec": 96.62348318099976
+    },
+    {
+      "epoch": 5,
+      "loss": 0.5053698930301165,
+      "val_acc": 0.8297697368421053,
+      "val_macro_f1": 0.8357955525841408,
+      "beta": 0.0,
+      "sec": 92.58814430236816
+    },
+    {
+      "epoch": 6,
+      "loss": 0.507637372534526,
+      "val_acc": 0.837171052631579,
+      "val_macro_f1": 0.8438907675193295,
+      "beta": 0.0,
+      "sec": 94.36181497573853
+    },
+    {
+      "epoch": 7,
+      "loss": 0.49954909399936076,
+      "val_acc": 0.834703947368421,
+      "val_macro_f1": 0.8408987332549507,
+      "beta": 0.0,
+      "sec": 94.29586458206177
+    },
+    {
+      "epoch": 8,
+      "loss": 0.4945621451264934,
+      "val_acc": 0.8330592105263158,
+      "val_macro_f1": 0.8398822308967726,
+      "beta": 0.0,
+      "sec": 92.99585628509521
+    },
+    {
+      "epoch": 9,
+      "loss": 0.49922210840802445,
+      "val_acc": 0.8297697368421053,
+      "val_macro_f1": 0.8364392312961583,
+      "beta": 0.0,
+      "sec": 94.38022637367249
+    },
+    {
+      "epoch": 10,
+      "loss": 0.4942215983020632,
+      "val_acc": 0.8314144736842105,
+      "val_macro_f1": 0.8381868819628222,
+      "beta": 0.0,
+      "sec": 93.16066217422485
+    }
+  ]
+}

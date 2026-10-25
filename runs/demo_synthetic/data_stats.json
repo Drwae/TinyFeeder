@@ -1,0 +1,33 @@
+{
+  "train": {
+    "videos": 153,
+    "samples": 4896,
+    "per_level": [
+      1289,
+      1548,
+      1162,
+      897
+    ]
+  },
+  "val": {
+    "videos": 38,
+    "samples": 1216,
+    "per_level": [
+      297,
+      398,
+      282,
+      239
+    ]
+  },
+  "test": {
+    "videos": 49,
+    "samples": 1568,
+    "per_level": [
+      428,
+      492,
+      343,
+      305
+    ]
+  },
+  "video_overlap_train_test": 0
+}

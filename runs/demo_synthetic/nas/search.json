@@ -1,0 +1,4624 @@
+{
+  "predictor": {
+    "n_profiled": 300,
+    "holdout_mape_pct": 9.702868301333185,
+    "regressor": "XGBoost",
+    "latency_ms_range": [
+      2.1868405000304847,
+      5.407547999993767
+    ]
+  },
+  "history": [
+    {
+      "generation": 1,
+      "evaluated": 22,
+      "front_size": 6,
+      "best_acc": 0.709703947368421,
+      "sec": 374.472941160202
+    },
+    {
+      "generation": 2,
+      "evaluated": 33,
+      "front_size": 10,
+      "best_acc": 0.709703947368421,
+      "sec": 401.4884514808655
+    },
+    {
+      "generation": 3,
+      "evaluated": 43,
+      "front_size": 12,
+      "best_acc": 0.709703947368421,
+      "sec": 375.18468022346497
+    },
+    {
+      "generation": 4,
+      "evaluated": 53,
+      "front_size": 12,
+      "best_acc": 0.709703947368421,
+      "sec": 357.5682647228241
+    },
+    {
+      "generation": 5,
+      "evaluated": 64,
+      "front_size": 12,
+      "best_acc": 0.709703947368421,
+      "sec": 420.2452824115753
+    },
+    {
+      "generation": 6,
+      "evaluated": 73,
+      "front_size": 12,
+      "best_acc": 0.709703947368421,
+      "sec": 335.35241627693176
+    }
+  ],
+  "evaluated": [
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.649671052631579,
+      "pred_latency_ms": 3.1790716648101807,
+      "params": 183188
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.649671052631579,
+      "pred_latency_ms": 3.2127790451049805,
+      "params": 203108
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6504934210526315,
+      "pred_latency_ms": 3.478693723678589,
+      "params": 197076
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.6439144736842105,
+      "pred_latency_ms": 3.2984414100646973,
+      "params": 199820
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.6447368421052632,
+      "pred_latency_ms": 3.4405574798583984,
+      "params": 177276
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.6661184210526315,
+      "pred_latency_ms": 5.071671485900879,
+      "params": 180984
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.6751644736842105,
+      "pred_latency_ms": 3.8803200721740723,
+      "params": 188620
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6842105263157895,
+      "pred_latency_ms": 3.8294639587402344,
+      "params": 229732
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6776315789473685,
+      "pred_latency_ms": 2.9922735691070557,
+      "params": 178468
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.671875,
+      "pred_latency_ms": 3.0448970794677734,
+      "params": 157148
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6546052631578947,
+      "pred_latency_ms": 3.1862833499908447,
+      "params": 308494
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.6389802631578947,
+      "pred_latency_ms": 3.3240129947662354,
+      "params": 170452
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.6282894736842105,
+      "pred_latency_ms": 3.5223586559295654,
+      "params": 181216
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6373355263157895,
+      "pred_latency_ms": 3.0483529567718506,
+      "params": 176820
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.678453947368421,
+      "pred_latency_ms": 2.8992364406585693,
+      "params": 215756
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6677631578947368,
+      "pred_latency_ms": 3.4099230766296387,
+      "params": 153764
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.709703947368421,
+      "pred_latency_ms": 3.6852052211761475,
+      "params": 199420
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.6578947368421053,
+      "pred_latency_ms": 3.2816123962402344,
+      "params": 178244
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.6455592105263158,
+      "pred_latency_ms": 3.8013734817504883,
+      "params": 212668
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.671875,
+      "pred_latency_ms": 3.2028279304504395,
+      "params": 184616
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.7047697368421053,
+      "pred_latency_ms": 3.1482431888580322,
+      "params": 216308
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6611842105263158,
+      "pred_latency_ms": 3.771338701248169,
+      "params": 221596
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.680921052631579,
+      "pred_latency_ms": 3.0413646697998047,
+      "params": 198292
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6636513157894737,
+      "pred_latency_ms": 3.01120662689209,
+      "params": 209344
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6208881578947368,
+      "pred_latency_ms": 3.018815517425537,
+      "params": 169268
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6603618421052632,
+      "pred_latency_ms": 2.9153895378112793,
+      "params": 158160
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.65625,
+      "pred_latency_ms": 3.214738130569458,
+      "params": 184916
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.7064144736842105,
+      "pred_latency_ms": 3.3062286376953125,
+      "params": 314132
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.7014802631578947,
+      "pred_latency_ms": 3.789055109024048,
+      "params": 239780
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.665296052631579,
+      "pred_latency_ms": 3.138669967651367,
+      "params": 216396
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6768092105263158,
+      "pred_latency_ms": 3.7075107097625732,
+      "params": 219236
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6636513157894737,
+      "pred_latency_ms": 3.9209208488464355,
+      "params": 222420
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6743421052631579,
+      "pred_latency_ms": 3.1329405307769775,
+      "params": 217292
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6677631578947368,
+      "pred_latency_ms": 3.2568199634552,
+      "params": 230636
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.6595394736842105,
+      "pred_latency_ms": 2.8531486988067627,
+      "params": 182836
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.671875,
+      "pred_latency_ms": 3.1820528507232666,
+      "params": 256092
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.587171052631579,
+      "pred_latency_ms": 2.9712769985198975,
+      "params": 159872
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6949013157894737,
+      "pred_latency_ms": 3.9492218494415283,
+      "params": 222676
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6759868421052632,
+      "pred_latency_ms": 3.1665425300598145,
+      "params": 302196
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.625,
+      "pred_latency_ms": 3.1319172382354736,
+      "params": 196292
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6817434210526315,
+      "pred_latency_ms": 3.3064723014831543,
+      "params": 150148
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6751644736842105,
+      "pred_latency_ms": 3.0318281650543213,
+      "params": 163752
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6578947368421053,
+      "pred_latency_ms": 3.170804500579834,
+      "params": 174156
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6644736842105263,
+      "pred_latency_ms": 3.6776413917541504,
+      "params": 231620
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.662828947368421,
+      "pred_latency_ms": 2.994917154312134,
+      "params": 186692
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6636513157894737,
+      "pred_latency_ms": 3.225951910018921,
+      "params": 199448
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.649671052631579,
+      "pred_latency_ms": 2.3125171661376953,
+      "params": 159420
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6833881578947368,
+      "pred_latency_ms": 3.09594464302063,
+      "params": 206836
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6324013157894737,
+      "pred_latency_ms": 2.9401838779449463,
+      "params": 158740
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6702302631578947,
+      "pred_latency_ms": 2.860689163208008,
+      "params": 156948
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.694078947368421,
+      "pred_latency_ms": 3.5195348262786865,
+      "params": 158186
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6833881578947368,
+      "pred_latency_ms": 3.167948007583618,
+      "params": 221308
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6611842105263158,
+      "pred_latency_ms": 3.2901651859283447,
+      "params": 171668
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.7023026315789473,
+      "pred_latency_ms": 3.5318920612335205,
+      "params": 304062
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6710526315789473,
+      "pred_latency_ms": 3.4029860496520996,
+      "params": 246612
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6768092105263158,
+      "pred_latency_ms": 3.7649753093719482,
+      "params": 186780
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6702302631578947,
+      "pred_latency_ms": 3.830279588699341,
+      "params": 169548
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.6521381578947368,
+      "pred_latency_ms": 2.8218259811401367,
+      "params": 175136
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6825657894736842,
+      "pred_latency_ms": 2.950356960296631,
+      "params": 180072
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6677631578947368,
+      "pred_latency_ms": 2.840618848800659,
+      "params": 169468
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6151315789473685,
+      "pred_latency_ms": 3.3219571113586426,
+      "params": 272628
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6274671052631579,
+      "pred_latency_ms": 3.1204135417938232,
+      "params": 178334
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6225328947368421,
+      "pred_latency_ms": 3.4128851890563965,
+      "params": 164692
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6546052631578947,
+      "pred_latency_ms": 3.340078830718994,
+      "params": 198640
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 64,
+          "se": false
+        }
+      ],
+      "acc": 0.6546052631578947,
+      "pred_latency_ms": 2.879026174545288,
+      "params": 165132
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6726973684210527,
+      "pred_latency_ms": 3.5570406913757324,
+      "params": 156974
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6644736842105263,
+      "pred_latency_ms": 3.7236337661743164,
+      "params": 194648
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6916118421052632,
+      "pred_latency_ms": 2.4354937076568604,
+      "params": 165804
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.6241776315789473,
+      "pred_latency_ms": 3.0548744201660156,
+      "params": 185060
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": false
+        }
+      ],
+      "acc": 0.6529605263157895,
+      "pred_latency_ms": 3.31196665763855,
+      "params": 243144
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6324013157894737,
+      "pred_latency_ms": 3.8004379272460938,
+      "params": 234348
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6735197368421053,
+      "pred_latency_ms": 3.254483461380005,
+      "params": 167948
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.6735197368421053,
+      "pred_latency_ms": 3.263235330581665,
+      "params": 250080
+    }
+  ],
+  "pareto": [
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.671875,
+      "pred_latency_ms": 3.0448970794677734,
+      "params": 157148
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.709703947368421,
+      "pred_latency_ms": 3.6852052211761475,
+      "params": 199420
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 4,
+          "s": 2,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 64,
+          "se": true
+        }
+      ],
+      "acc": 0.7047697368421053,
+      "pred_latency_ms": 3.1482431888580322,
+      "params": 216308
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 1,
+          "c": 32,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 6,
+          "s": 1,
+          "c": 48,
+          "se": true
+        },
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 6,
+          "s": 2,
+          "c": 32,
+          "se": true
+        }
+      ],
+      "acc": 0.7064144736842105,
+      "pred_latency_ms": 3.3062286376953125,
+      "params": 314132
+    },
+    {
+      "arch": [
+        {
+          "type": "MBConv",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6817434210526315,
+      "pred_latency_ms": 3.3064723014831543,
+      "params": 150148
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6751644736842105,
+      "pred_latency_ms": 3.0318281650543213,
+      "params": 163752
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.649671052631579,
+      "pred_latency_ms": 2.3125171661376953,
+      "params": 159420
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 3,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6702302631578947,
+      "pred_latency_ms": 2.860689163208008,
+      "params": 156948
+    },
+    {
+      "arch": [
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "MBConv",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 16,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 3,
+          "s": 2,
+          "c": 24,
+          "se": true
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 48,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.694078947368421,
+      "pred_latency_ms": 3.5195348262786865,
+      "params": 158186
+    },
+    {
+      "arch": [
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 1,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 16,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 5,
+          "e": 1,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 3,
+          "e": 4,
+          "s": 2,
+          "c": 32,
+          "se": false
+        },
+        {
+          "type": "IR",
+          "k": 5,
+          "e": 6,
+          "s": 1,
+          "c": 24,
+          "se": false
+        },
+        {
+          "type": "DWSep",
+          "k": 3,
+          "e": 1,
+          "s": 2,
+          "c": 32,
+          "se": false
+        }
+      ],
+      "acc": 0.6916118421052632,
+      "pred_latency_ms": 2.4354937076568604,
+      "params": 165804
+    }
+  ]
+}
