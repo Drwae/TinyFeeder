@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the article below."
 title: "TinyFeeder: hardware-aware NAS, mixed-precision QAT and multi-teacher distillation for fish feeding-intensity recognition on edge devices"
 version: 1.0.0
-doi: 10.5281/zenodo.23640938
+doi: 10.5281/zenodo.23640937
 date-released: 2026-10-25
 license: MIT
 repository-code: "https://github.com/Drwae/TinyFeeder"

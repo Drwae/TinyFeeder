@@ -3,7 +3,7 @@
 **Hardware-aware neural architecture search, mixed-precision quantization-aware training and multi-teacher distillation for multimodal fish feeding-intensity recognition on edge devices.**
 
 [![tests](https://github.com/Drwae/TinyFeeder/actions/workflows/ci.yml/badge.svg)](https://github.com/Drwae/TinyFeeder/actions/workflows/ci.yml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23640938.svg)](https://doi.org/10.5281/zenodo.23640938)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23640937.svg)](https://doi.org/10.5281/zenodo.23640937)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Reference implementation of
@@ -103,7 +103,7 @@ Please cite the article (see [CITATION.cff](CITATION.cff)) and this software:
   title   = {TinyFeeder: reference implementation},
   year    = {2026},
   version = {1.0.0},
-  doi     = {10.5281/zenodo.23640938},
+  doi     = {10.5281/zenodo.23640937},
   url     = {https://github.com/Drwae/TinyFeeder}
 }
 ```
