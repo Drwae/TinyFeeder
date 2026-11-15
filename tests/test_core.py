@@ -65,3 +65,20 @@ def test_nsga2_primitives():
     arch = random_arch(random.Random(0))
     TinyFeeder(visual_genes=arch)(torch.randn(1, 3, 64, 64), torch.randn(1, 1, 32, 32))
     assert len(TINYFEEDER_VISUAL) == len(arch)
+
+
+def test_group_split_keeps_sessions_together():
+    d = tiny_data()
+    d["group_id"] = (d["video_id"] // 2).astype(np.int32)
+    from tinyfeeder.data import unit_key
+    assert unit_key(d) == "group_id"
+    s = video_level_split(d["group_id"], d["labels"], seed=1)
+    tr, te = AVFeedingDataset(d, s["train"]), AVFeedingDataset(d, s["test"])
+    assert not set(d["group_id"][tr.idx]) & set(d["group_id"][te.idx])
+
+
+def test_cluster_bootstrap_ci():
+    from tinyfeeder.engine import bootstrap_ci
+    y = np.zeros(100, int); p = np.zeros(100, int); p[:10] = 1
+    lo, hi = bootstrap_ci(y, p, n=200, groups=np.arange(100) // 10)
+    assert lo <= 0.9 <= hi

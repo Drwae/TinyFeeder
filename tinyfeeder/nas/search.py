@@ -218,3 +218,25 @@ def select(pareto, lat_max, params_max):
     """score(a) = acc(a) * 1[L(a) <= L_max] * 1[params(a) <= P_max] (Section 3.3.4)."""
     ok = [r for r in pareto if r["pred_latency_ms"] <= lat_max and r["params"] <= params_max]
     return max(ok or pareto, key=lambda r: r["acc"])
+
+
+def fit_from_csv(path, img_size, mel_size, log=print):
+    """Train the latency predictor on latencies profiled on the TARGET device
+    (CSV written by deploy/profile_device.py: arch_json, latency_ms)."""
+    import csv
+
+    rows = list(csv.DictReader(open(path)))
+    X = np.stack([encode(json.loads(r["arch_json"]), img_size, mel_size) for r in rows])
+    y = np.array([float(r["latency_ms"]) for r in rows])
+    rng = np.random.default_rng(0)
+    idx = rng.permutation(len(y))
+    n_tr = int(0.8 * len(y))
+    tr, te = idx[:n_tr], idx[n_tr:]
+    pred = LatencyPredictor().fit(X[tr], y[tr])
+    err = np.abs(pred.predict(X[te]) - y[te]) / y[te]
+    pred.fit(X, y)
+    stats = {"source": str(path), "n_profiled": len(y), "holdout_mape_pct": float(100 * err.mean()),
+             "holdout_within_10pct": float((err <= 0.10).mean()), "regressor": pred.kind,
+             "latency_ms_range": [float(y.min()), float(y.max())]}
+    log(f"    latency predictor from {path}: {stats}")
+    return pred, stats

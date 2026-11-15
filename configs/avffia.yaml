@@ -1,0 +1,64 @@
+# TinyFeeder on the public AV-FFIA dataset (Cui et al., IEEE T-ASE 2024).
+# Prepare the data first: scripts/prepare_avffia.py (see docs/REPRODUCE.md).
+# Budgets below fit one 24 GB GPU in roughly 1-2 days; lower batch_size on smaller GPUs.
+seed: 2026
+out_dir: runs/avffia
+
+data:
+  synthetic: false
+  path: data/avffia/avffia_224.npz
+  img_size: 224
+  n_mels: 128
+  split_fracs: [0.64, 0.16, 0.20]   # by recording session (group_id), never by clip
+
+teachers:                            # distillation teachers (ImageNet-pretrained, via timm)
+  backbones: [resnest50d, swin_tiny_patch4_window7_224, convnext_base]
+  use_timm: true
+  pretrained: true
+  epochs: 30
+  lr: 1.0e-4
+  batch_size: 32
+
+baselines:                           # lightweight comparison models trained with the same protocol
+  backbones: [mobilenet_v3_large, efficientnet_b0, shufflenet_v2_x1_0, resnet18]
+  use_timm: false
+  pretrained: true
+  epochs: 30
+  lr: 3.0e-4
+  batch_size: 64
+
+nas:
+  latency_csv: data/jetson_latency.csv   # from deploy/profile_device.py run ON the Jetson
+  profile_archs: 300                     # used only if latency_csv is missing (host CPU fallback)
+  population: 16
+  generations: 12
+  proxy_epochs: 4                        # proxy task: short training of each candidate, no weight sharing
+  proxy_train_units: null                # null = all training sessions
+  proxy_batch_size: 128
+  latency_budget_ms: 50.0
+  params_budget: 500000
+  patience: 10
+
+stage1:
+  epochs: 100
+  lr: 2.0e-3
+  batch_size: 128
+
+stage2:
+  epochs: 30
+  lr: 1.0e-4
+  batch_size: 128
+  fp16_fraction: 0.15
+  sensitivity_val_units: null
+
+stage3:
+  epochs: 60
+  warmup: 10
+  lr: 1.0e-4
+  batch_size: 64
+  tau: 4.0
+  beta_max: 0.7
+  lambdas: [1.0, 0.5, 0.3]
+
+export:
+  onnx: true

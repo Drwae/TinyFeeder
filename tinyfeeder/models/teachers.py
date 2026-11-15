@@ -14,22 +14,24 @@ import torchvision.models as tvm
 
 from .blocks import ConvBNAct
 
-TORCHVISION = {
-    "resnet18": (lambda: tvm.resnet18(weights=None), 512),
-    "resnet50": (lambda: tvm.resnet50(weights=None), 2048),
-    "mobilenet_v3_large": (lambda: tvm.mobilenet_v3_large(weights=None), 960),
-    "shufflenet_v2_x1_0": (lambda: tvm.shufflenet_v2_x1_0(weights=None), 1024),
-    "convnext_tiny": (lambda: tvm.convnext_tiny(weights=None), 768),
+TORCHVISION = {  # name -> (constructor(pretrained), pooled feature dim)
+    "resnet18": (lambda pt: tvm.resnet18(weights="DEFAULT" if pt else None), 512),
+    "resnet50": (lambda pt: tvm.resnet50(weights="DEFAULT" if pt else None), 2048),
+    "mobilenet_v3_large": (lambda pt: tvm.mobilenet_v3_large(weights="DEFAULT" if pt else None), 960),
+    "mobilenet_v3_small": (lambda pt: tvm.mobilenet_v3_small(weights="DEFAULT" if pt else None), 576),
+    "shufflenet_v2_x1_0": (lambda pt: tvm.shufflenet_v2_x1_0(weights="DEFAULT" if pt else None), 1024),
+    "efficientnet_b0": (lambda pt: tvm.efficientnet_b0(weights="DEFAULT" if pt else None), 1280),
+    "convnext_tiny": (lambda pt: tvm.convnext_tiny(weights="DEFAULT" if pt else None), 768),
 }
 
 
 class _TVTrunk(nn.Module):
     """Wrap a torchvision classifier so it returns (pooled, feature-map)."""
 
-    def __init__(self, name):
+    def __init__(self, name, pretrained=False):
         super().__init__()
         ctor, self.dim = TORCHVISION[name]
-        m = ctor()
+        m = ctor(pretrained)
         if name.startswith("resnet"):
             self.features = nn.Sequential(*list(m.children())[:-2])
         elif name.startswith("shufflenet"):
@@ -62,10 +64,10 @@ class _TimmTrunk(nn.Module):
 
 
 class Teacher(nn.Module):
-    def __init__(self, backbone="resnet18", n_classes=4, use_timm=False, pretrained=True):
+    def __init__(self, backbone="resnet18", n_classes=4, use_timm=False, pretrained=False):
         super().__init__()
         self.name = backbone
-        self.visual = _TimmTrunk(backbone, pretrained) if use_timm else _TVTrunk(backbone)
+        self.visual = _TimmTrunk(backbone, pretrained) if use_timm else _TVTrunk(backbone, pretrained)
         self.acoustic = nn.Sequential(
             ConvBNAct(1, 32, 3, 2, act="relu"), ConvBNAct(32, 64, 3, 2, act="relu"),
             ConvBNAct(64, 128, 3, 2, act="relu"), ConvBNAct(128, 256, 3, 2, act="relu"),

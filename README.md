@@ -41,7 +41,7 @@ The demo generates a synthetic AV-FFIA-like dataset (240 sessions, 7,680 paired 
 
 ## Demonstration run on synthetic data
 
-> ⚠️ **These numbers come from synthetic data and a CPU-sized configuration. They demonstrate that the pipeline runs end-to-end; they are not, and must not be quoted as, the results of the article, which were obtained on the AV-FFIA farm recordings with `configs/paper.yaml`.**
+> ⚠️ **These numbers come from synthetic data and a CPU-sized configuration. They demonstrate that the pipeline runs end-to-end; they are not, and must not be quoted as, results of the article. The article's experiments use the public AV-FFIA dataset with `configs/avffia.yaml` (see [docs/REPRODUCE.md](docs/REPRODUCE.md)).**
 
 | Model | Params | Size (MB) | Test acc. (%) | Macro-F1 | Weighted-F1 |
 |---|---:|---:|---:|---:|---:|
@@ -68,12 +68,17 @@ The complete outputs of this run (`splits.json`, NAS search log and Pareto front
 
 ## Reproducing the article
 
-1. Obtain the AV-FFIA recordings (see [docs/DATA.md](docs/DATA.md)) and convert them to the documented `.npz` layout.
-2. On the target device, profile the search space for the latency predictor:
-   `python deploy/profile_device.py --n 5000 --img 224 --mel 128 --out jetson_latency.csv`
-3. `pip install -e ".[paper]"` (adds `timm` for the ResNeSt50 / Swin-T / ConvNeXt-Base teachers) and run
-   `python scripts/run_pipeline.py --config configs/paper.yaml` on a GPU server.
-4. Deploy: `python deploy/calibrate.py --config configs/paper.yaml` then `bash deploy/build_tensorrt.sh runs/paper/tinyfeeder.onnx` on the Jetson; see [deploy/to_tflite.md](deploy/to_tflite.md) for Raspberry Pi / Coral.
+The complete protocol — downloading and converting the public AV-FFIA dataset
+(Cui *et al.*, IEEE T-ASE 2024), session-level splitting, Jetson profiling for
+the hardware-aware search, training, on-device benchmarking and generation of
+every table from one set of saved predictions — is in
+[docs/REPRODUCE.md](docs/REPRODUCE.md). In short:
+
+```bash
+python scripts/prepare_avffia.py --video-root <...> --audio-root <...> --out data/avffia/avffia_224.npz
+python scripts/run_pipeline.py --config configs/avffia.yaml --device cuda --workers 8
+python scripts/paper_tables.py --run runs/avffia --jetson runs/avffia/jetson_benchmark.json
+```
 
 ## Repository layout
 
@@ -85,9 +90,9 @@ tinyfeeder/
   quant/       fake-quantization (INT8 / FP16), sensitivity analysis helpers
   distill/     multi-teacher KD losses and β schedule
   engine.py    training / evaluation loops, metrics, latency and FLOP counting
-scripts/       run_pipeline.py, make_figures.py
-deploy/        TensorRT build, calibration, TFLite notes, device profiler, feeding controller
-configs/       demo_synthetic.yaml, paper.yaml
+scripts/       prepare_avffia.py, run_pipeline.py, paper_tables.py, make_figures.py
+deploy/        device profiler, Jetson benchmark + parser, TensorRT build, calibration, TFLite notes, feeding controller
+configs/       demo_synthetic.yaml, avffia.yaml
 runs/          outputs of the synthetic demonstration run
 tests/         unit tests (split leakage, QAT, KD, NSGA-II, model)
 ```

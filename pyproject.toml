@@ -14,6 +14,7 @@ dependencies = ["torch>=2.1", "torchvision>=0.16", "numpy", "scipy", "pyyaml", "
 
 [project.optional-dependencies]
 paper = ["timm>=0.9"]
+prep = ["opencv-python-headless>=4.8", "librosa>=0.10"]
 dev = ["pytest"]
 
 [tool.setuptools.packages.find]
