@@ -167,9 +167,13 @@ def st_nas(c: Ctx):
     n = c.cfg["nas"]
     (c.out / "nas").mkdir(exist_ok=True)
     img, mel = c.sizes
-    if n.get("latency_csv"):
+    if n.get("latency_csv") and Path(n["latency_csv"]).exists():
         pred, pstats = fit_from_csv(n["latency_csv"], img, mel, c.log)
+        pstats["source"] = f"device profile {n['latency_csv']}"
     else:
+        if n.get("latency_csv"):
+            c.log(f"[nas] WARNING: {n['latency_csv']} not found - falling back to host-CPU latency "
+                  "(must be reported as such; re-run --stages nas ... --force once the device profile exists)")
         c.log(f"[nas] no device profile given - profiling {n['profile_archs']} architectures on THIS host")
         pred, pstats = profile_and_fit(n["profile_archs"], img, mel, c.cfg["seed"], c.log)
         pstats["source"] = "host CPU (not the target device)"
