@@ -19,6 +19,16 @@ def configure(device="auto", num_workers=0):
     if device == "auto":
         device = "cuda" if torch.cuda.is_available() else "cpu"
     DEVICE, NUM_WORKERS = torch.device(device), num_workers
+    if num_workers > 0:
+        # NAS builds a fresh DataLoader for every candidate: share tensors through the file system and lift the
+        # open-file limit, or a long search dies with «OSError: Too many open files»
+        torch.multiprocessing.set_sharing_strategy("file_system")
+        try:
+            import resource
+            soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+            resource.setrlimit(resource.RLIMIT_NOFILE, (max(soft, min(hard, 65536)), hard))
+        except (ImportError, ValueError, OSError):
+            pass
     if DEVICE.type == "cuda":
         torch.backends.cudnn.benchmark = True
     return DEVICE
@@ -27,7 +37,7 @@ def configure(device="auto", num_workers=0):
 def _loader(ds, batch_size, shuffle=False, drop_last=False):
     return DataLoader(ds, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last,
                       num_workers=NUM_WORKERS, pin_memory=DEVICE.type == "cuda",
-                      persistent_workers=NUM_WORKERS > 0)
+                      persistent_workers=False)   # persistent workers of discarded loaders pile up
 
 
 def _to(*xs):
