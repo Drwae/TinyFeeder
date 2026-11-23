@@ -194,6 +194,7 @@ def count_flops(model, img_size, mel_size):
         elif isinstance(m, nn.Linear):
             macs[0] += m.in_features * m.out_features
 
+    model = model.cpu()   # it may still sit on the GPU after predict_ds
     hs = [m.register_forward_hook(hook) for m in model.modules() if isinstance(m, (nn.Conv2d, nn.Linear))]
     with torch.no_grad():
         model.eval()
