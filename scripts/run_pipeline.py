@@ -38,6 +38,7 @@ from tinyfeeder.engine import count_flops, evaluate_ds, fit, measure_latency, pr
 from tinyfeeder.models import Teacher, TinyFeeder, param_breakdown  # noqa: E402
 from tinyfeeder.nas import nsga2, profile_and_fit, select  # noqa: E402
 from tinyfeeder.nas.search import fit_from_csv  # noqa: E402
+from tinyfeeder.quant.fakequant import ActObserver  # noqa: E402
 from tinyfeeder.quant import model_size_mb, precision_map, prepare_qat, quantizable_layers, strip_qat  # noqa: E402
 
 STAGES = ["data", "teachers", "baselines", "nas", "stage1", "stage2", "stage3", "evaluate", "export"]
@@ -124,6 +125,14 @@ def st_data(c: Ctx):
     c.log("[data] split by", key, json.dumps(stats))
 
 
+def _tr(c: Ctx, s: dict | None = None) -> dict:
+    """Training protocol shared by every model (config `train`, overridable per section): weight averaging and how
+    the final weights are chosen."""
+    g = dict(c.cfg.get("train") or {})
+    g.update({k: v for k, v in (s or {}).items() if k in ("ema_decay", "select", "weight_decay")})
+    return {"ema_decay": g.get("ema_decay"), "select": g.get("select", "best"), "weight_decay": g.get("weight_decay", 1e-4)}
+
+
 def _train_two_stream(c: Ctx, section: str, sub: str):
     t = c.cfg[section]
     tdir = c.out / sub
@@ -136,7 +145,8 @@ def _train_two_stream(c: Ctx, section: str, sub: str):
         seed_all(c.cfg["seed"])
         c.log(f"[{sub}] training {name} (training split only)")
         m = Teacher(name, use_timm=t.get("use_timm", False), pretrained=t.get("pretrained", True))
-        m, hist = fit(m, c.ds("train", True), c.ds("val"), t["epochs"], t["lr"], t["batch_size"], log=c.log)
+        m, hist = fit(m, c.ds("train", True), c.ds("val"), t["epochs"], t["lr"], t["batch_size"], log=c.log,
+                      **_tr(c, t))
         torch.save(m.state_dict(), f)
         res[name] = {"val": evaluate_ds(m, c.ds("val")), "params": n_params(m), "history": hist}
         c.save_json(res, f"{sub}.json")
@@ -149,6 +159,10 @@ def st_teachers(c: Ctx):
 def st_baselines(c: Ctx):
     if c.cfg.get("baselines", {}).get("backbones"):
         _train_two_stream(c, "baselines", "baselines")
+    # the same backbones trained from scratch with TinyFeeder's protocol: the like-for-like test of the searched
+    # architecture (the ImageNet-pretrained ones stay as the upper reference)
+    if c.cfg.get("baselines_scratch", {}).get("backbones"):
+        _train_two_stream(c, "baselines_scratch", "baselines_scratch")
 
 
 def load_two_stream(c: Ctx, section: str, sub: str):
@@ -217,9 +231,20 @@ def st_stage1(c: Ctx):
     seed_all(c.cfg["seed"])
     m = TinyFeeder(visual_genes=selected_arch(c))
     c.log(f"[stage1] FP32 training of the NAS architecture: {param_breakdown(m)}")
-    m, hist = fit(m, c.ds("train", True), c.ds("val"), s["epochs"], s["lr"], s["batch_size"], log=c.log)
+    kw = {}
+    if s.get("kd"):   # distil from the teachers from the first epoch: the small network trained from scratch on
+        #               26 sessions otherwise memorises them (stage-3 distillation alone comes too late)
+        teachers = load_two_stream(c, "teachers", "teachers")
+        kd = MultiTeacherKD(m.visual.out_dim + m.acoustic.out_dim, [t.feat_dim for t in teachers],
+                            s["tau"], tuple(s["lambdas"]))
+        c.log(f"[stage1] with multi-teacher KD from {[t.name for t in teachers]}")
+        kw = dict(teachers=teachers, kd=kd, extra_params=kd.parameters(),
+                  beta_fn=lambda e: beta_schedule(e, s.get("warmup", 0), s.get("ramp", 5), s["beta_max"]))
+    m, hist = fit(m, c.ds("train", True), c.ds("val"), s["epochs"], s["lr"], s["batch_size"], log=c.log,
+                  **_tr(c, s), **kw)
     torch.save(m.state_dict(), c.out / "stage1.pt")
-    c.save_json({"params": param_breakdown(m), "history": hist}, "stage1.json")
+    c.save_json({"params": param_breakdown(m), "kd": bool(s.get("kd")), "protocol": _tr(c, s), "history": hist},
+                "stage1.json")
 
 
 def st_stage2(c: Ctx):
@@ -239,20 +264,41 @@ def st_stage2(c: Ctx):
     for name in quantizable_layers(base):
         torch.manual_seed(c.cfg["seed"])  # identical calibration batches for every layer
         m = prepare_qat(copy.deepcopy(base), only=name).to(E.DEVICE)
-        m.train()
+        m.eval()   # calibrate only the activation observers: train mode would also shift BatchNorm statistics,
+        for mod in m.modules():   # which cost every layer the same ~2.5 points and hid the real sensitivities
+            if isinstance(mod, ActObserver):
+                mod.train()
         with torch.no_grad():
             for b, (x, a, _) in enumerate(calib):
                 m(*E._to(x, a))
                 if b >= 3:
                     break
         sens[name] = acc_fp32 - evaluate_ds(m, sens_ds)["accuracy"]
+    # check that quantization itself is sound before any QAT training: every layer INT8, observers calibrated on a
+    # few training batches (BatchNorm untouched), compared with FP32 on the validation and test sessions
+    torch.manual_seed(c.cfg["seed"])
+    ptq = prepare_qat(copy.deepcopy(base)).to(E.DEVICE)
+    ptq.eval()
+    for mod in ptq.modules():
+        if isinstance(mod, ActObserver):
+            mod.train()
+    with torch.no_grad():
+        for b, (x, a, _) in enumerate(calib):
+            ptq(*E._to(x, a))
+            if b >= 15:
+                break
+    ptq.eval()
+    ptq_check = {part: {"fp32": evaluate_ds(base, c.ds(part))["accuracy"], "int8_ptq": evaluate_ds(ptq, c.ds(part))["accuracy"]}
+                 for part in ("val", "test")}
+    c.log(f"[stage2] PTQ check (no training): {ptq_check}")
     ranked = sorted(sens, key=lambda k: -sens[k])
     k = max(1, int(round(s["fp16_fraction"] * len(ranked))))
     fp16 = ranked[:k]
     c.log(f"[stage2] FP16 layers (top {k}): {fp16}")
     q = prepare_qat(copy.deepcopy(base), fp16_layers=set(fp16))
     seed_all(c.cfg["seed"])
-    q, hist = fit(q, c.ds("train", True), c.ds("val"), s["epochs"], s["lr"], s.get("batch_size", 64), log=c.log)
+    q, hist = fit(q, c.ds("train", True), c.ds("val"), s["epochs"], s["lr"], s.get("batch_size", 64), log=c.log,
+                  **_tr(c, s))
     torch.save(q.state_dict(), c.out / "stage2.pt")
     abl = {}
     for tag, kw in {"int8_per_channel": dict(fp16_layers=set()),
@@ -260,10 +306,10 @@ def st_stage2(c: Ctx):
         seed_all(c.cfg["seed"])
         mq = prepare_qat(copy.deepcopy(base), **kw)
         mq, _ = fit(mq, c.ds("train", True), c.ds("val"), s["epochs"], s["lr"], s.get("batch_size", 64),
-                    log=lambda *a: None)
+                    log=lambda *a: None, **_tr(c, s))
         abl[tag] = {"val_acc": evaluate_ds(mq, c.ds("val"))["accuracy"], "size_mb": model_size_mb(mq)}
         c.log(f"[stage2] ablation {tag}: {abl[tag]}")
-    c.save_json({"fp32_val_acc": acc_fp32, "sensitivity": sens, "fp16_layers": fp16,
+    c.save_json({"fp32_val_acc": acc_fp32, "ptq_check": ptq_check, "sensitivity": sens, "fp16_layers": fp16,
                  "precision_map": precision_map(q), "size_mb": model_size_mb(q),
                  "fp32_size_mb": n_params(base) * 4 / 1e6, "ablation": abl, "history": hist}, "stage2.json")
 
@@ -286,7 +332,8 @@ def st_stage3(c: Ctx):
     c.log(f"[stage3] multi-teacher KD from {[t.name for t in teachers]} - same student architecture as stage 2")
     student, hist = fit(student, c.ds("train", True), c.ds("val"), s["epochs"], s["lr"], s.get("batch_size", 64),
                         log=c.log, teachers=teachers, kd=kd, extra_params=kd.parameters(),
-                        beta_fn=lambda e: beta_schedule(e, s["warmup"], s["epochs"] - s["warmup"], s["beta_max"]))
+                        beta_fn=lambda e: beta_schedule(e, s["warmup"], s["epochs"] - s["warmup"], s["beta_max"]),
+                        **_tr(c, s))
     torch.save(student.state_dict(), c.out / "tinyfeeder_final.pt")
     c.save_json({"tau": s["tau"], "beta_max": s["beta_max"], "lambdas": s["lambdas"], "history": hist}, "stage3.json")
 
@@ -317,6 +364,9 @@ def st_evaluate(c: Ctx):
         models[f"teacher_{t.name}"] = t
     for b in load_two_stream(c, "baselines", "baselines"):
         models[f"baseline_{b.name}"] = b
+    if c.cfg.get("baselines_scratch", {}).get("backbones"):
+        for b in load_two_stream(c, "baselines_scratch", "baselines_scratch"):
+            models[f"scratch_{b.name}"] = b
     info = {}
     for name, m in models.items():
         y, p, pr, al = predict_ds(m, te, return_alpha=True)

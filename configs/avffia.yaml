@@ -11,6 +11,11 @@ data:
   n_mels: 128
   split_fracs: [0.64, 0.16, 0.20]   # by recording session (group_id), never by clip
 
+train:                               # protocol shared by every model (teachers, baselines, TinyFeeder stages)
+  ema_decay: 0.995                     # evaluate and keep the exponential moving average of the weights
+  select: last                         # the final (averaged) weights; the 6 validation sessions are only monitored,
+                                       # never used to pick an epoch (a lucky epoch on 6 sessions does not hold on test)
+
 teachers:                            # distillation teachers (ImageNet-pretrained, via timm)
   backbones: [resnest50d, swin_tiny_patch4_window7_224, convnext_base]
   use_timm: true
@@ -27,6 +32,15 @@ baselines:                           # lightweight comparison models trained wit
   lr: 3.0e-4
   batch_size: 64
 
+baselines_scratch:                   # the same backbones from random init, trained with TinyFeeder's protocol
+  backbones: [mobilenet_v3_large, efficientnet_b0, shufflenet_v2_x1_0, resnet18]
+  use_timm: false
+  pretrained: false
+  epochs: 40
+  lr: 2.0e-3
+  batch_size: 64
+  weight_decay: 0.05
+
 nas:
   latency_csv: data/jetson_latency.csv   # from deploy/profile_device.py run ON the Jetson
   profile_archs: 300                     # used only if latency_csv is missing (host CPU fallback)
@@ -40,9 +54,16 @@ nas:
   patience: 10
 
 stage1:
-  epochs: 100
+  epochs: 40
   lr: 2.0e-3
   batch_size: 128
+  weight_decay: 0.05
+  kd: true                             # multi-teacher KD from the first epoch (same loss as stage 3)
+  warmup: 0
+  ramp: 5
+  beta_max: 0.7
+  tau: 4.0
+  lambdas: [1.0, 0.5, 0.3]
 
 stage2:
   epochs: 30

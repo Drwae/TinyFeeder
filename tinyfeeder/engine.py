@@ -1,6 +1,7 @@
 """Training / evaluation loops shared by all stages."""
 from __future__ import annotations
 
+import copy
 import math
 import time
 
@@ -109,9 +110,15 @@ def bootstrap_ci(y, p, n=1000, seed=0, groups=None):
 
 def fit(model, train_ds, val_ds, epochs, lr, batch_size=64, weight_decay=1e-4,
         loss_fn=None, extra_params=(), step_hook=None, log=print, label_smoothing=0.1,
-        teachers=None, kd=None, beta_fn=None, max_batches=None):
+        teachers=None, kd=None, beta_fn=None, max_batches=None, ema_decay=None, select="best"):
     """Generic AdamW + cosine trainer. If `teachers`/`kd` are given the
-    multi-teacher distillation objective is used."""
+    multi-teacher distillation objective is used.
+
+    ema_decay : keep an exponential moving average of the weights (and BN/observer buffers); validation and the
+                returned model use the averaged weights.
+    select    : "best" - the epoch with the highest validation accuracy (prone to picking a lucky epoch when the
+                validation split has few recording sessions); "last" - the weights at the end of training, so the
+                validation split is only monitored and never used to choose the model."""
     tl = _loader(train_ds, batch_size, shuffle=True, drop_last=True)
     vl = _loader(val_ds, 256)
     model.to(DEVICE)
@@ -126,6 +133,8 @@ def fit(model, train_ds, val_ds, epochs, lr, batch_size=64, weight_decay=1e-4,
                                                 anneal_strategy="cos")
     ce = loss_fn or nn.CrossEntropyLoss(label_smoothing=label_smoothing)
     best, best_state, hist = -1, None, []
+    ema = copy.deepcopy(model).eval() if ema_decay else None
+    step = 0
     for ep in range(epochs):
         model.train()
         t0, tot, n = time.time(), 0.0, 0
@@ -145,17 +154,33 @@ def fit(model, train_ds, val_ds, epochs, lr, batch_size=64, weight_decay=1e-4,
             loss.backward()
             nn.utils.clip_grad_norm_(params, 1.0)
             opt.step(), sched.step()
+            step += 1
+            if ema is not None:
+                _ema_update(ema, model, min(ema_decay, (1 + step) / (10 + step)))
             tot, n = tot + loss.item() * len(y), n + len(y)
-        val = evaluate(model, vl)
+        net = ema if ema is not None else model
+        val = evaluate(net, vl)
         hist.append({"epoch": ep + 1, "loss": tot / max(n, 1), "val_acc": val["accuracy"],
                      "val_macro_f1": val["macro_f1"], "beta": beta, "sec": time.time() - t0})
         log(f"    ep {ep + 1:3d}/{epochs}  loss {tot / max(n, 1):.4f}  val_acc {val['accuracy']:.4f}"
             f"  macroF1 {val['macro_f1']:.4f}  beta {beta:.2f}  ({time.time() - t0:.0f}s)")
-        if val["accuracy"] > best:
+        if select == "best" and val["accuracy"] > best:
             best = val["accuracy"]
-            best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
+            best_state = {k: v.detach().clone() for k, v in net.state_dict().items()}
+    if select == "last":
+        best_state = {k: v.detach().clone() for k, v in net.state_dict().items()}
     model.load_state_dict(best_state)
     return model, hist
+
+
+@torch.no_grad()
+def _ema_update(ema, model, d):
+    msd = model.state_dict()
+    for k, v in ema.state_dict().items():
+        if v.dtype.is_floating_point:
+            v.mul_(d).add_(msd[k].detach(), alpha=1 - d)
+        else:
+            v.copy_(msd[k])
 
 
 def evaluate_ds(model, ds, batch_size=256):
