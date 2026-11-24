@@ -42,6 +42,29 @@ class VisualEncoder(nn.Module):
         return fmap.mean((2, 3)), fmap
 
 
+class PretrainedVisualEncoder(nn.Module):
+    """An ImageNet-pretrained tiny backbone (timm) in place of the searched encoder: its feature map (before the
+    classifier's conv head) -> 1x1 projection to the same 64 channels, so fusion, quantization and distillation are
+    unchanged."""
+
+    def __init__(self, name="mobilenetv3_small_050", pretrained=True, out_c=64):
+        super().__init__()
+        import timm
+
+        self.m = timm.create_model(name, pretrained=pretrained, num_classes=0, global_pool="")
+        for head in ("conv_head", "norm_head", "act2", "classifier"):   # unused by forward_features: drop their
+            if hasattr(self.m, head):                                   # weights so they are not counted/deployed
+                setattr(self.m, head, nn.Identity())
+        with torch.no_grad():
+            c = self.m.forward_features(torch.zeros(1, 3, 64, 64)).shape[1]
+        self.proj = ConvBNAct(c, out_c, 1, act="hswish")
+        self.out_dim = out_c
+
+    def forward(self, x):
+        fmap = self.proj(self.m.forward_features(x))
+        return fmap.mean((2, 3)), fmap
+
+
 class AcousticEncoder(nn.Module):
     def __init__(self, out_dim=128):
         super().__init__()
@@ -77,10 +100,11 @@ class GatedFusion(nn.Module):
 
 
 class TinyFeeder(nn.Module):
-    def __init__(self, visual_genes=None, n_classes=4, modality="both"):
+    def __init__(self, visual_genes=None, n_classes=4, modality="both", visual_backbone=None, pretrained=True):
         super().__init__()
         self.modality = modality
-        self.visual = VisualEncoder(visual_genes)
+        self.visual = (PretrainedVisualEncoder(visual_backbone, pretrained) if visual_backbone
+                       else VisualEncoder(visual_genes))
         self.acoustic = AcousticEncoder()
         self.fusion = GatedFusion(self.visual.out_dim, self.acoustic.out_dim, n_classes)
 

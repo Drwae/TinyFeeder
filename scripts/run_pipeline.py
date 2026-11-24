@@ -224,12 +224,21 @@ def selected_arch(c):
     return c.load_json("nas/selected_arch.json")["arch"]
 
 
+def student(c, pretrained=True):
+    """The TinyFeeder student: the NAS-selected visual encoder, or (config `student.visual_backbone`) an
+    ImageNet-pretrained tiny backbone with the same acoustic encoder and fusion."""
+    st = c.cfg.get("student") or {}
+    bb = st.get("visual_backbone")
+    return TinyFeeder(visual_genes=None if bb else selected_arch(c), visual_backbone=bb,
+                      pretrained=pretrained and st.get("pretrained", True))
+
+
 def st_stage1(c: Ctx):
     if c.done("stage1.pt"):
         return
     s = c.cfg["stage1"]
     seed_all(c.cfg["seed"])
-    m = TinyFeeder(visual_genes=selected_arch(c))
+    m = student(c)
     c.log(f"[stage1] FP32 training of the NAS architecture: {param_breakdown(m)}")
     kw = {}
     if s.get("kd"):   # distil from the teachers from the first epoch: the small network trained from scratch on
@@ -251,7 +260,7 @@ def st_stage2(c: Ctx):
     if c.done("stage2.pt", "stage2.json"):
         return
     s = c.cfg["stage2"]
-    base = TinyFeeder(visual_genes=selected_arch(c))
+    base = student(c, pretrained=False)
     base.load_state_dict(torch.load(c.out / "stage1.pt", map_location="cpu"))
     units = c.split["val"]
     if s.get("sensitivity_val_units"):
@@ -316,7 +325,7 @@ def st_stage2(c: Ctx):
 
 def quantized_student(c):
     st2 = c.load_json("stage2.json")
-    return prepare_qat(TinyFeeder(visual_genes=selected_arch(c)), fp16_layers=set(st2["fp16_layers"]))
+    return prepare_qat(student(c, pretrained=False), fp16_layers=set(st2["fp16_layers"]))
 
 
 def st_stage3(c: Ctx):
@@ -351,7 +360,7 @@ def st_evaluate(c: Ctx):
     img, mel = c.sizes
     te = c.ds("test")
     models = {}
-    fp32 = TinyFeeder(visual_genes=selected_arch(c))
+    fp32 = student(c, pretrained=False)
     fp32.load_state_dict(torch.load(c.out / "stage1.pt", map_location="cpu"))
     models["tinyfeeder_stage1_fp32"] = fp32
     qat = quantized_student(c)
