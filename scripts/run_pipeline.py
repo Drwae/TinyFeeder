@@ -265,9 +265,16 @@ def st_stage2(c: Ctx):
     units = c.split["val"]
     if s.get("sensitivity_val_units"):
         units = random.Random(1).sample(units, min(s["sensitivity_val_units"], len(units)))
-    sens_ds = c.ds(None, videos=units)
-    calib = E._loader(c.ds("train"), 128, shuffle=True)
-    acc_fp32 = evaluate_ds(base, sens_ds)["accuracy"]
+    # the sensitivity set and the calibration batches are read once and kept in memory: a fresh DataLoader per layer
+    # (64 layers with a pretrained backbone) exhausted the pod's shared memory («Bus error» in the workers)
+    torch.manual_seed(c.cfg["seed"])
+    sens_ds = list(E._loader(c.ds(None, videos=units), 128))
+    calib = []
+    for b, batch in enumerate(E._loader(c.ds("train"), 128, shuffle=True)):
+        calib.append(batch)
+        if b >= 15:
+            break
+    acc_fp32 = E.evaluate(base, sens_ds)["accuracy"]
     sens = {}
     c.log(f"[stage2] layer-wise sensitivity over {len(quantizable_layers(base))} layers (FP32 acc {acc_fp32:.4f})")
     for name in quantizable_layers(base):
@@ -282,7 +289,7 @@ def st_stage2(c: Ctx):
                 m(*E._to(x, a))
                 if b >= 3:
                     break
-        sens[name] = acc_fp32 - evaluate_ds(m, sens_ds)["accuracy"]
+        sens[name] = acc_fp32 - E.evaluate(m, sens_ds)["accuracy"]
     # check that quantization itself is sound before any QAT training: every layer INT8, observers calibrated on a
     # few training batches (BatchNorm untouched), compared with FP32 on the validation and test sessions
     torch.manual_seed(c.cfg["seed"])
