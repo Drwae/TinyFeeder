@@ -129,8 +129,9 @@ def _tr(c: Ctx, s: dict | None = None) -> dict:
     """Training protocol shared by every model (config `train`, overridable per section): weight averaging and how
     the final weights are chosen."""
     g = dict(c.cfg.get("train") or {})
-    g.update({k: v for k, v in (s or {}).items() if k in ("ema_decay", "select", "weight_decay")})
-    return {"ema_decay": g.get("ema_decay"), "select": g.get("select", "best"), "weight_decay": g.get("weight_decay", 1e-4)}
+    g.update({k: v for k, v in (s or {}).items() if k in ("ema_decay", "select", "weight_decay", "modality_dropout")})
+    return {"ema_decay": g.get("ema_decay"), "select": g.get("select", "best"), "weight_decay": g.get("weight_decay", 1e-4),
+            "modality_dropout": g.get("modality_dropout", 0.0)}
 
 
 def _train_two_stream(c: Ctx, section: str, sub: str):

@@ -110,12 +110,16 @@ def bootstrap_ci(y, p, n=1000, seed=0, groups=None):
 
 def fit(model, train_ds, val_ds, epochs, lr, batch_size=64, weight_decay=1e-4,
         loss_fn=None, extra_params=(), step_hook=None, log=print, label_smoothing=0.1,
-        teachers=None, kd=None, beta_fn=None, max_batches=None, ema_decay=None, select="best"):
+        teachers=None, kd=None, beta_fn=None, max_batches=None, ema_decay=None, select="best",
+        modality_dropout=0.0):
     """Generic AdamW + cosine trainer. If `teachers`/`kd` are given the
     multi-teacher distillation objective is used.
 
     ema_decay : keep an exponential moving average of the weights (and BN/observer buffers); validation and the
                 returned model use the averaged weights.
+    modality_dropout : probability that a training sample loses one modality (half the time the video - set to the
+                same constant frame as the `visual_off` corruption - half the time the audio, zeroed as `audio_off`),
+                so the fusion learns to use either stream alone; teachers still see both.
     select    : "best" - the epoch with the highest validation accuracy (prone to picking a lucky epoch when the
                 validation split has few recording sessions); "last" - the weights at the end of training, so the
                 validation split is only monitored and never used to choose the model."""
@@ -143,13 +147,14 @@ def fit(model, train_ds, val_ds, epochs, lr, batch_size=64, weight_decay=1e-4,
             if max_batches and b >= max_batches:
                 break
             x, a, y = _to(x, a, y)
+            xs, as_ = (_drop_modality(x, a, modality_dropout) if modality_dropout else (x, a))
             if teachers is not None:
                 with torch.no_grad():
                     t_outs = [t(x, a, return_dict=True) for t in teachers]
-                s_out = model(x, a, return_dict=True)
+                s_out = model(xs, as_, return_dict=True)
                 loss, _ = kd(s_out, t_outs, y, beta)
             else:
-                loss = ce(model(x, a), y)
+                loss = ce(model(xs, as_), y)
             opt.zero_grad(set_to_none=True)
             loss.backward()
             nn.utils.clip_grad_norm_(params, 1.0)
@@ -171,6 +176,22 @@ def fit(model, train_ds, val_ds, epochs, lr, batch_size=64, weight_decay=1e-4,
         best_state = {k: v.detach().clone() for k, v in net.state_dict().items()}
     model.load_state_dict(best_state)
     return model, hist
+
+
+_OFF = None
+
+
+@torch.no_grad()
+def _drop_modality(x, a, p):
+    global _OFF
+    if _OFF is None or _OFF.device != x.device:
+        from tinyfeeder.data.dataset import MEAN, STD
+        _OFF = torch.tensor(-MEAN / STD, device=x.device).view(1, 3, 1, 1)   # an all-zero frame after normalisation
+    r = torch.rand(x.shape[0], device=x.device)
+    v_off, a_off = r < p / 2, (r >= p / 2) & (r < p)
+    x = torch.where(v_off.view(-1, 1, 1, 1), _OFF.to(x.dtype).expand_as(x), x)
+    a = torch.where(a_off.view(-1, 1, 1, 1), torch.zeros_like(a), a)
+    return x, a
 
 
 @torch.no_grad()
