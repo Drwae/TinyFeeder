@@ -430,8 +430,30 @@ def st_export(c: Ctx):
     for sec, sub in (("teachers", "teachers"), ("baselines", "baselines")):
         for t in load_two_stream(c, sec, sub):
             torch.onnx.export(t.cpu(), (x, a), odir / f"{sub[:-1]}_{t.name}.onnx", input_names=["frame", "mel"],
-                              output_names=["logits"], opset_version=17, dynamo=False)
+                              output_names=["logits"], opset_version=17, dynamo=False,
+                              dynamic_axes={"frame": {0: "batch"}, "mel": {0: "batch"}, "logits": {0: "batch"}})
     out["comparison_onnx"] = sorted(str(p) for p in odir.glob("*.onnx"))
+    # TensorRT names of the layers that stage 2 keeps in FP16 (for the mixed-precision engine on the device)
+    if (c.out / "stage2.json").exists():
+        import onnx
+
+        def canon(scope):  # "/visual/blocks/blocks.2/blocks.2.0/conv_dw/Conv" -> "visual.blocks.2.0.conv_dw"
+            parts = []
+            for tok in scope.strip("/").split("/")[:-1]:
+                if parts and tok.startswith(parts[-1] + "."):
+                    parts[-1] = tok
+                else:
+                    parts.append(tok)
+            return ".".join(parts)
+
+        nodes = {canon(n.name): n.name for n in onnx.load(str(path)).graph.node if n.op_type in ("Conv", "Gemm")}
+        fp16 = c.load_json("stage2.json").get("fp16_layers", [])
+        names = [nodes.get(f.replace(".m.", ".")) for f in fp16]
+        missing = [f for f, n in zip(fp16, names) if n is None]
+        (c.out / "trt_layer_precisions.txt").write_text(",".join(f"{n}:fp16" for n in names if n))
+        out["trt_fp16_layers"] = len(fp16) - len(missing)
+        if missing:
+            c.log(f"[export] WARNING: no ONNX node found for FP16 layers {missing}")
     c.save_json(out, "export.json")
     c.log("[export]", json.dumps(out))
 
